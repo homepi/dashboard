@@ -1,0 +1,26 @@
+.select-icon {
+    width: 20px;
+    height: 20px;
+    background-size: cover !important;
+    display: block;
+    float: left;
+}
+
+.accessory-icon {
+    width: 20px;
+    height: 20px;
+    background-size: cover !important;
+    display: block;
+}
+
+.doorbell {
+    background: url(../icons/doorbell.svg) no-repeat;
+}
+
+.lamp {
+    background: url(../icons/lamp-on.svg) no-repeat;
+}
+
+.switch {
+    background: url(../icons/switch-on.svg) no-repeat;
+}
