@@ -1,6 +1,5 @@
 <template>
     <div class="application">
-        <Titlebar />
         <div class="main-app">
             <transition name="router-animation"
                         enter-active-class="animated fadeIn"
@@ -16,12 +15,8 @@
 <script>
 
     import "animate.css/animate.min.css";
-    import Titlebar from "../models/Titlebar";
 
     export default {
-        components: {
-            Titlebar
-        },
         computed: {
             loggedIn() {
                 return this.$store.getters.loggedIn

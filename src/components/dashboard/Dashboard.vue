@@ -7,7 +7,6 @@
         <Sidemenu :user="user" />
 
         <div class="main-container">
-            <notifications group="dashboard" position="top center" :max="1" />
             <router-view name="dashboard" />
         </div>
 
