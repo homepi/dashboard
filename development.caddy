@@ -1,0 +1,10 @@
+:80 {
+
+    gzip
+    root /HomePi/public
+
+    rewrite {
+        regexp .*
+        to {path} /
+    }
+}

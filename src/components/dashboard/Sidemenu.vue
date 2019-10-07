@@ -137,7 +137,7 @@
     }
 
     .sidemenu {
-        padding: 25px 10px 10px;
+        padding: 10px;
         background-size: contain;
         top: 0;
         z-index: 1;

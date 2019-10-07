@@ -24,12 +24,11 @@ const router = new VueRouter({
     mode: 'history'
 });
 
-require('bootstrap/dist/js/bootstrap.min.js');
-require('bootstrap/dist/css/bootstrap.min.css');
-require('font-awesome/css/font-awesome.min.css');
-
-require('./assets/css/app.css');
-require('./assets/css/electron.css');
+import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
+import "animate.css/animate.min.css";
+import "./assets/css/app.css";
 
 import 'vue-loaders/dist/vue-loaders.css';
 import VueLoaders from 'vue-loaders';

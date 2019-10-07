@@ -4,7 +4,7 @@ import axios from 'axios'
 
 Vue.use(Vuex);
 
-let baseURL =  'http://10.1.1.100:9002';
+let baseURL =  'http://10.1.1.110:9002';
 axios.defaults.baseURL = baseURL + '/api/v1';
 
 export const store = new Vuex.Store({
