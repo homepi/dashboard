@@ -1,7 +1,7 @@
 :80 {
 
     gzip
-    root /HomePi/public
+    root ./dist
 
     rewrite {
         regexp .*
