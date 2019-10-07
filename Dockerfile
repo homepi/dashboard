@@ -2,7 +2,7 @@ FROM ubuntu
 
 # Update packages and install curl
 RUN apt-get update\
-    && apt-get install -y curl\
+    && apt-get install -y curl
 
 # Installing caddy
 RUN curl https://getcaddy.com | bash -s personal
