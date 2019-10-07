@@ -2,17 +2,27 @@
 
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+npm run build
+```
+
+### Building docker image
+```
+docker build . --tag=homepi-dashboard
+```
+
+### Run docker image
+```
+docker run -dp 80:80 --restart always homepi-dashboard
 ```
 
 ### Customize configuration
