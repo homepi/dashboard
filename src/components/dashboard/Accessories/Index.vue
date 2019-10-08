@@ -151,21 +151,6 @@
 
 <style>
 
-    .modal-dark .modal-body {
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    .modal-dark .modal-footer {
-        border: none;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .modal-dark .modal-content {
-        background-color: #181818 !important;
-    }
-
     .card-accessory {
         border: 0;
         cursor: pointer;

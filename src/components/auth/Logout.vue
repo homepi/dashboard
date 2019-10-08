@@ -2,7 +2,15 @@
     export default {
         created() {
             this.$store.dispatch('logout').then(() => {
-                this.$router.push({ name: 'login' })
+                this.$router.push({ name: 'login' }).then(() => {
+                    this.$notify({
+                        group: 'auth',
+                        type: 'success',
+                        text: "Logout successfully!",
+                        title: "Success",
+                        duration: 2000,
+                    });
+                });
             })
         }
     }

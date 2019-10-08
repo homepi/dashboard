@@ -54,6 +54,24 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+router.beforeEach(async (to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters.loggedIn) {
+            if (localStorage.getItem("user") === null){
+                await store.dispatch("getUser").then(response => {
+                    localStorage.setItem("user", JSON.stringify(response.data.result));
+                });
+            }
+
+            let user = await localStorage.getItem("user");
+            if (user !== null){
+                store.state.user = JSON.parse(user);
+            }
+        }
+    }
+    next()
+});
+
 axios.interceptors.request.use(async config => {
 
     if (store.getters.loggedIn && config.__isRetryRequest && store.getters.token !== null) {

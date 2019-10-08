@@ -114,8 +114,6 @@
                     this.serverError = "";
                     // this.successMessage = 'Login successfully! Please wait ...';
 
-                    this.$refs.topProgress.done();
-
                     this.$notify({
                         group: 'auth',
                         type: 'success',
@@ -125,6 +123,7 @@
                     });
 
                     setTimeout(() => {
+                        this.$refs.topProgress.done();
                         this.$router.push({ name: 'dashboard' })
                     }, 1000);
 
