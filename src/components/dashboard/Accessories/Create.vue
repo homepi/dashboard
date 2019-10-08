@@ -63,26 +63,26 @@
 
                 <div class="clearfix"></div>
 
-                <label>Accessory action</label>
+                <label>Accessory task</label>
                 <div class="clearfix"></div>
 
                 <div class="accessory_actions">
 
-                    <div class="card card-body bg-dark accessory_action pull-left"
+                    <div class="card card-body bg-dark accessory_action"
                          v-on:click="onActionClicked($event, 'door')">
 
                         <img src="../../../assets/icons/doorbell.svg" />
                         <span class="title mt-1">Door</span>
                     </div>
 
-                    <div class="card card-body bg-dark accessory_action pull-left"
+                    <div class="card card-body bg-dark accessory_action"
                          v-on:click="onActionClicked($event, 'lamp')">
 
                         <img src="../../../assets/icons/lamp-on.svg" />
                         <span class="title mt-1">Lamp</span>
                     </div>
 
-                    <div class="card card-body bg-dark accessory_action pull-left"
+                    <div class="card card-body bg-dark accessory_action"
                          v-on:click="onActionClicked($event, 'toggle')">
 
                         <img src="../../../assets/icons/switch-on.svg" />
@@ -364,6 +364,7 @@
 
     .accessory_action {
         margin-right: 10px;
+        float: left;
         cursor: pointer;
         width: 95px;
         text-align: center;

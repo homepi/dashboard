@@ -10,22 +10,18 @@
             <router-view name="dashboard" />
         </div>
 
-        <!--<Health />-->
-
     </div>
 
 </template>
 
 <script>
 
-    import Health from './Health';
     import Sidemenu from './Sidemenu';
 
     export default {
         name: 'Dashboard',
         components: {
             Sidemenu,
-            Health
         },
         data() {
             return {

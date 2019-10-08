@@ -108,8 +108,5 @@ new Vue({
     router: router,
     store: store,
     components: { Master },
-    created() {
-        this.$router.push('/');
-    },
     template: '<Master />'
 });

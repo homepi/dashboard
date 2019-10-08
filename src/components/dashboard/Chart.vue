@@ -1,31 +1,43 @@
 <template>
 
-    <div class="profile p-4">
+    <div class="p-4">
 
-        <h5 class="title-border-bottom">
-            Chart
-            <span class="clearfix"></span>
-            <small>
-                You can see the weekly api requests in below chart.
-            </small>
-        </h5>
+        <Health />
 
-        <div class="clearfix"></div>
+        <div class="weekly-chart p-2">
 
-        <LineChart :chart-data="chartData" :options="options" />
+            <strong class="side-component-title">
+                <i class="fa fa-line-chart text-primary mr-2"></i>
+                Weekly requests chart
+            </strong>
+
+            <div class="clearfix"></div>
+            <LineChart :chart-data="chartData" :options="options" />
+
+        </div>
 
     </div>
 
 </template>
 
+<style>
+
+    .weekly-chart {
+        margin-right: 300px;
+    }
+
+</style>
+
 <script>
 
+    import Health from './Health';
     import LineChart from '../../charts/LineChart'
 
     export default {
         name: 'Chart',
         components: {
             LineChart,
+            Health
         },
         data() {
             return {
@@ -83,11 +95,7 @@
                 }
             }
         },
-        mounted() {
-
-
-
-        }
+        mounted() {}
     }
 
 </script>

@@ -1,6 +1,3 @@
-// Main components
-// import LandingPage from './components/LandingPage'
-
 // Auth components
 import Login from './components/auth/Login'
 import Logout from './components/auth/Logout'
@@ -33,7 +30,6 @@ const routes = [
         components: {
             main: Login,
         },
-        props: true,
         meta: {
             requiresVisitor: true,
         }
@@ -50,15 +46,13 @@ const routes = [
     },
     {
         path: '/dashboard',
-        name: 'dashboard',
-        redirect: '/dashboard/chart',
         components: {
             main: Dashboard,
         },
         children: [
             {
-                path: 'chart',
-                name: 'chart',
+                path: '',
+                name: 'dashboard',
                 components: {
                     dashboard: Chart,
                 },
@@ -106,7 +100,6 @@ const routes = [
                 },
             },
         ],
-        props: true,
         meta: {
             requiresAuth: true,
         }

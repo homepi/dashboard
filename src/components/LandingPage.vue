@@ -1,7 +1,3 @@
 <script>
-    export default {
-        created() {
-            this.$router.push({ name: 'login' })
-        }
-    }
+    export default {}
 </script>

@@ -240,18 +240,24 @@
             },
 
             updateCpuChart(value) {
-                this.$refs.cpu_chart.updateSeries([value]);
-                this.checkChartColor(value, this.$refs.cpu_chart);
+                if (typeof this.$refs.cpu_chart !== "undefined"){
+                    this.$refs.cpu_chart.updateSeries([value]);
+                    this.checkChartColor(value, this.$refs.cpu_chart);
+                }
             },
 
             updateMemoryChart(value) {
-                this.$refs.memory_chart.updateSeries([value]);
-                this.checkChartColor(value, this.$refs.memory_chart);
+                if (typeof this.$refs.memory_chart !== "undefined"){
+                    this.$refs.memory_chart.updateSeries([value]);
+                    this.checkChartColor(value, this.$refs.memory_chart);
+                }
             },
 
             updateDiskChart(value) {
-                this.$refs.disk_chart.updateSeries([value]);
-                this.checkChartColor(value, this.$refs.disk_chart);
+                if (typeof this.$refs.disk_chart !== "undefined"){
+                    this.$refs.disk_chart.updateSeries([value]);
+                    this.checkChartColor(value, this.$refs.disk_chart);
+                }
             },
 
             checkChartColor(value, chart) {

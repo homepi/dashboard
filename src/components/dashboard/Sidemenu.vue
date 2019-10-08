@@ -2,13 +2,13 @@
 
     <div class="sidemenu">
 
-        <router-link :to="{ name: 'chart' }">
+        <router-link :to="{ name: 'dashboard' }">
             <i class="logo"></i>
         </router-link>
 
         <ul class="menu">
             <li>
-                <router-link :to="{ name: 'chart' }">
+                <router-link :to="{ name: 'dashboard' }">
                     <i class="fa fa-dashboard"></i>
                 </router-link>
             </li>
@@ -35,12 +35,6 @@
                 <router-link class="bg-primary" :to="{ name: 'create_accessory' }">
                     <i class="fa fa-plus"></i>
                 </router-link>
-            </li>
-
-            <li class="custom-btn-menu">
-                <a class="bg-danger">
-                    <i class="fa fa-heartbeat"></i>
-                </a>
             </li>
 
         </ul>
