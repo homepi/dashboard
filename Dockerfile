@@ -17,7 +17,9 @@ RUN mkdir /home-pi
 WORKDIR /home-pi
 
 # Adding built project to work directory
-RUN cp ./dist ./development.caddy /home-pi
+ADD ./dist .
+
+ADD ./development.caddy .
 
 # Exposing port
 EXPOSE 80
