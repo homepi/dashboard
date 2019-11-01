@@ -12,6 +12,10 @@
             </small>
         </h5>
 
+        <div v-show="!logs.length">
+            There's nothing here ...
+        </div>
+
         <div class="clearfix"></div>
 
         <table class="table table-hover table-dark" v-if="logs.length">
@@ -31,7 +35,7 @@
                     {{ row + 1 }}
                 </td>
                 <td>
-                    <img class="left-side-avatar" :src="baseURL + '/avatars/' + log.user.user_hash + '/' + log.user.avatar">
+                    <img class="left-side-avatar" :src="baseURL + '/uploads/avatars/' + log.user.avatar + '.png'">
                     {{ log.user.fullname }}
                 </td>
                 <td>{{ log.accessory.description }}</td>

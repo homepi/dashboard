@@ -6,11 +6,11 @@
 
         <h5 class="mb-3">
 
-            <div class="pull-left">
+            <span class="pull-left">
                 Users
                 <span class="clearfix"></span>
                 <small>You can manage all the users here.</small>
-            </div>
+            </span>
 
             <router-link class="btn btn-primary pull-right"
                          :to="{ name: 'create_user' }">
@@ -18,6 +18,10 @@
             </router-link>
 
         </h5>
+
+        <div v-show="!users.length">
+            There's nothing here ...
+        </div>
 
         <div class="clearfix"></div>
 
@@ -27,7 +31,7 @@
 
                 <div class="user-details">
 
-                    <img :src="baseURL + '/avatars/' + user.user_hash + '/' + user.avatar"
+                    <img :src="baseURL + '/uploads/avatars/' + user.avatar + '.png'"
                          class="avatar-card pull-left" />
 
                     <span class="user-name-list">

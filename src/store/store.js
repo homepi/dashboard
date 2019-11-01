@@ -81,6 +81,21 @@ export const store = new Vuex.Store({
                     })
             })
         },
+        getRecentLogs(context) {
+
+            axios.defaults.headers.common['Authorization'] =
+                'Bearer ' + context.state.token;
+
+            return new Promise((resolve, reject) => {
+                axios.get('/user/@recent_logs')
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
         getAccessories(context) {
 
             axios.defaults.headers.common['Authorization'] =

@@ -19,25 +19,25 @@
     src: url('../fonts/nunito/nunito_regular.ttf') format('truetype');
 }
 
-/*::-webkit-scrollbar {*/
-    /*width: 14px;*/
-/*}*/
+::-webkit-scrollbar {
+    width: 14px;
+}
 
-/*!* 4px scroll thumb. 10px margin from right margin *!*/
-/*::-webkit-scrollbar-track {*/
-    /*box-shadow: inset 0 0 14px 14px transparent;*/
-    /*border: solid 4px transparent;*/
-/*}*/
+/* 4px scroll thumb. 10px margin from right margin */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 14px 14px transparent;
+    border: solid 4px transparent;
+}
 
-/*::-webkit-scrollbar-thumb {*/
-    /*box-shadow: inset 0 0 14px 14px #333333;*/
-    /*border: solid 4px transparent;*/
-    /*border-radius: 14px;*/
-/*}*/
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 14px 14px #333333;
+    border: solid 4px transparent;
+    border-radius: 14px;
+}
 
-/*::-webkit-scrollbar-button {*/
-    /*display: none;*/
-/*}*/
+::-webkit-scrollbar-button {
+    display: none;
+}
 
 body {
     font-family: nunito, sans-serif;

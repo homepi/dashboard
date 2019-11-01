@@ -7,8 +7,8 @@
             <strong class="side-component-title">
                 <i class="fa fa-heartbeat text-danger mr-2"></i>
                 Health care!
-
-                <i class="fa fa-refresh pull-right refresh-btn" @click="updateCharts"></i>
+                <i class="fa fa-refresh pull-right refresh-btn"
+                   @click="updateCharts"></i>
             </strong>
 
             <div class="row">
@@ -51,18 +51,25 @@
             <strong class="side-component-title">
                 <i class="fa fa-sticky-note mr-2"></i>
                 Recent Activities!
+                <i class="fa fa-refresh pull-right refresh-btn"
+                    @click="loadRecentLogs"></i>
             </strong>
 
             <div class="activities pt-2">
 
-                <div class="toast toast-dark opacity-1">
+                <div class="toast toast-dark opacity-1" v-for="log in recent_logs">
                     <div class="toast-header">
-                        <strong class="mr-auto">Alireza Josheghani</strong>
-                        <small>11 mins ago</small>
+                        <strong class="mr-auto">
+                            {{ log.user.fullname }}
+                        </strong>
+                        <small>
+                            {{ log.created_at | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
+                        </small>
                     </div>
                     <div class="toast-body">
-                        <img class="small-icon" src="../../assets/icons/doorbell.svg" />
-                        Opened the yard door!
+                        <i class="select-icon mr-2"
+                           :class="log.accessory.icon"></i>
+                        {{ log.accessory.description }}
                     </div>
                 </div>
 
@@ -217,9 +224,20 @@
                         labels: ['Disk Usage'],
                     }
                 },
+                recent_logs: [],
             }
         },
         methods: {
+
+            loadRecentLogs() {
+
+                this.recent_logs = [];
+
+                this.$store.dispatch('getRecentLogs').then((response) => {
+                    this.recent_logs = response.data.result.data;
+                });
+
+            },
 
             updateCharts() {
 
@@ -278,11 +296,17 @@
         },
         mounted() {
             this.updateCharts();
+            this.loadRecentLogs();
         }
     }
 </script>
 
 <style>
+
+    .activities {
+        overflow: auto;
+        height: 100%;
+    }
 
     .refresh-btn {
         cursor: pointer;
@@ -299,12 +323,15 @@
     }
 
     .health {
+        overflow-y: auto;
+        overflow-x: hidden;
         position: fixed;
         top: 0;
+        bottom: 0;
         right: 0;
         width: 300px;
         background: #181818;
-        height: 100%;
+        min-height: 100vh;
         padding: 10px;
     }
 

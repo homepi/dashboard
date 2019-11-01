@@ -19,8 +19,8 @@ WORKDIR /home-pi
 # Adding built project to work directory
 ADD ./dist ./dist
 
-# Copy development caddy file to root
-RUN cp ./development.caddy /home-pi/development.caddy
+# Adding development caddy file to root
+ADD ./development.caddy .
 
 # Exposing port
 EXPOSE 80

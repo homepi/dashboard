@@ -9,6 +9,8 @@
             <strong class="side-component-title">
                 <i class="fa fa-line-chart text-primary mr-2"></i>
                 Weekly requests chart
+
+                <i class="fa fa-refresh pull-right refresh-btn"></i>
             </strong>
 
             <div class="clearfix"></div>

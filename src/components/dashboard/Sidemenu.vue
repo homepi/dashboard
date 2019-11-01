@@ -44,7 +44,7 @@
             <div class="footer">
                 <a class="user-avatar-button">
 
-                    <img :src="baseURL + '/avatars/' + user.user_hash + '/' + user.avatar"
+                    <img :src="baseURL + '/uploads/avatars/' + user.avatar + '.png'"
                          v-if="user.avatar"
                          class="avatar"
                          :alt="user.fullname" />
@@ -105,8 +105,8 @@
             }
         },
         methods: {
-            redirect(name){
-                this.$router.push(name).then(() => {
+            redirect(route_name){
+                this.$router.push({ name: route_name }).then(() => {
                     $("#logoutModal").modal('hide');
                 });
             },
