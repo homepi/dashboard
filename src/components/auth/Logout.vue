@@ -1,6 +1,12 @@
+<template>
+    <div>
+        Hang on a second...
+    </div>
+</template>
+
 <script>
     export default {
-        created() {
+        mounted() {
             this.$store.dispatch('logout').then(() => {
                 this.$router.push({ name: 'login' }).then(() => {
                     this.$notify({

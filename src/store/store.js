@@ -27,13 +27,17 @@ export const store = new Vuex.Store({
         baseURL: state => state.baseURL,
     },
     mutations: {
-        retrieveToken: (state, token) => {
-            state.token = token
+        retrieveToken: (state, {token, refreshed_token}) => {
+            state.token = token;
+            state.refreshed_token = refreshed_token;
         },
         destroyToken: (state) => {
             state.token = null;
+            state.refreshed_token = null;
             state.user = {};
+            localStorage.removeItem("user");
             localStorage.removeItem("access_token");
+            localStorage.removeItem("refreshed_token");
         },
         addUserData: (state, data) => {
             state.user = data;
@@ -52,10 +56,11 @@ export const store = new Vuex.Store({
             return new Promise((resolve, reject) => {
                 axios.post('/auth/@refresh').then(response => {
 
-                    let token = response.headers["authorization"];
+                    let {token, refreshed_token} = response.data.result;
 
                     localStorage.setItem('access_token', token);
-                    context.commit('retrieveToken', token);
+                    localStorage.setItem('refreshed_token', refreshed_token);
+                    context.commit('retrieveToken', response.data.result);
 
                     let user = response.data.result;
                     context.commit('addUserData', user);
@@ -276,8 +281,8 @@ export const store = new Vuex.Store({
 
                 const params = new URLSearchParams();
 
-                params.append('username', credentials.username);
-                params.append('password', credentials.password);
+                params.append('user', credentials.username);
+                params.append('pass', credentials.password);
 
                 axios.post('/auth/@create', params, {
                     headers: {
@@ -285,10 +290,12 @@ export const store = new Vuex.Store({
                     }
                 }).then(response => {
 
-                    const token = response.data.result.token;
+                    const {token, refreshed_token} = response.data.result;
 
                     localStorage.setItem('access_token', token);
-                    context.commit('retrieveToken', token);
+                    localStorage.setItem('refreshed_token', refreshed_token);
+
+                    context.commit('retrieveToken', response.data.result);
 
                     resolve(response)
                 })

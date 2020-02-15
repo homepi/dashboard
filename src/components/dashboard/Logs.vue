@@ -47,7 +47,7 @@
                 </td>
                 <td>
                     <i class="fa fa-clock-o"></i>
-                    {{ log.created_at | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
+                    {{ log.created_at.seconds | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
                 </td>
             </tr>
 
@@ -77,7 +77,7 @@
             this.baseURL = this.$store.state.baseURL;
 
             this.$store.dispatch("getLogs").then(response => {
-                this.logs = response.data.result.data;
+                this.logs = response.data.result;
                 this.$refs.topProgress.done();
             }).catch(error => {
                 console.log(error);
@@ -85,4 +85,5 @@
             })
         }
     }
+
 </script>

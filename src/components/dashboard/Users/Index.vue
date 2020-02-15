@@ -19,7 +19,9 @@
 
         </h5>
 
-        <div v-show="!users.length">
+        <div class="clearfix"></div>
+
+        <div class="mt-4" v-show="!users.length">
             There's nothing here ...
         </div>
 

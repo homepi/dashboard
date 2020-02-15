@@ -7,7 +7,9 @@
         <Sidemenu :user="user" />
 
         <div class="main-container">
-            <router-view name="dashboard" />
+            <keep-alive>
+                <router-view name="dashboard" />
+            </keep-alive>
         </div>
 
     </div>

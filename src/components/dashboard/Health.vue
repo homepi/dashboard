@@ -58,19 +58,22 @@
             <div class="activities pt-2">
 
                 <div class="toast toast-dark opacity-1" v-for="log in recent_logs">
+
                     <div class="toast-header">
                         <strong class="mr-auto">
                             {{ log.user.fullname }}
                         </strong>
                         <small>
-                            {{ log.created_at | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
+                            {{ log.created_at.seconds | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
                         </small>
                     </div>
+
                     <div class="toast-body">
                         <i class="select-icon mr-2"
                            :class="log.accessory.icon"></i>
                         {{ log.accessory.description }}
                     </div>
+
                 </div>
 
             </div>
@@ -234,7 +237,7 @@
                 this.recent_logs = [];
 
                 this.$store.dispatch('getRecentLogs').then((response) => {
-                    this.recent_logs = response.data.result.data;
+                    this.recent_logs = response.data.result;
                 });
 
             },

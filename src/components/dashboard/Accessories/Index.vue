@@ -27,11 +27,11 @@
                     <i class="select-icon" v-bind:class="accessory.icon"></i>
 
                     <!-- Title -->
-                    <span class="fa-pull-left mr-1 ml-2 mb-0">
+                    <span class="fa-pull-left ml-2 mb-0">
                         {{ accessory.name }}
                     </span>
 
-                    <strong>|</strong>
+                    <strong class="mr-1 ml-1">|</strong>
 
                     <!-- Description -->
                     <small>{{ accessory.description }}</small>
@@ -139,7 +139,7 @@
             this.$refs.topProgress.start();
 
             this.$store.dispatch("getAccessories").then(response => {
-                this.accessories = response.data.result.data;
+                this.accessories = response.data.result;
                 this.$refs.topProgress.done();
             }).catch(() => {
                 this.$refs.topProgress.done();
