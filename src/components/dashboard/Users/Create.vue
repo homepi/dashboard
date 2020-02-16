@@ -1,13 +1,19 @@
 <template>
-    <div class="create_theater p-4">
+    <div class="create_theater p-3">
 
         <vue-topprogress ref="topProgress" />
 
-        <h5 class="mb-3">
-            <strong>Create a new user</strong>
-            <span class="clearfix"></span>
-            <small>You can create a new user here.</small>
-        </h5>
+        <div class="titlebar pb-2 mb-3">
+
+            <strong class="side-component-title">
+                <i class="fa fa-user text-primary mr-2"></i>
+                Create a new user
+                <small class="border-left-title">
+                    You can create a new user here.
+                </small>
+            </strong>
+
+        </div>
 
         <div class="clearfix"></div>
 

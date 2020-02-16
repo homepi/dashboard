@@ -320,7 +320,6 @@
     }
 
     strong.side-component-title {
-        border-bottom: 2px solid #333;
         padding: 4px;
         display: block;
     }

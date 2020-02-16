@@ -79,8 +79,8 @@ body {
 
 .main-container {
     margin-left: 60px;
-    padding: 10px;
     margin-right: 0;
+    padding: 0 10px 10px;
 }
 
 .user img.user-avatar {
@@ -240,6 +240,16 @@ ul.social-networks li {
 ul.social-networks li a {
     color: #fff;
     font-size: 20px;
+}
+
+.titlebar {
+    border-bottom: 2px solid #333;
+}
+
+.border-left-title {
+    border-left: 2px solid #333333;
+    padding-left: 10px;
+    margin-left: 5px;
 }
 
 .title-border-bottom {

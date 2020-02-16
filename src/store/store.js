@@ -10,7 +10,7 @@ axios.defaults.baseURL = baseURL + '/api/v1';
 export const store = new Vuex.Store({
     state: {
         token: localStorage.getItem('access_token') || null,
-        user: {},
+        user: null,
         baseURL: baseURL,
     },
     getters: {
@@ -46,7 +46,10 @@ export const store = new Vuex.Store({
     },
     actions: {
         logout(context) {
-            context.commit("destroyToken");
+            return new Promise((resolve) => {
+                context.commit("destroyToken");
+                resolve();
+            })
         },
         refreshTokenAndGetUser(context) {
 
@@ -209,7 +212,7 @@ export const store = new Vuex.Store({
         refreshToken(context) {
 
             axios.defaults.headers.common['Authorization'] =
-                'Bearer ' + context.state.token;
+                'Bearer ' + context.state.refreshed_token;
 
             return new Promise((resolve, reject) => {
                 axios.post('/auth/@refresh')

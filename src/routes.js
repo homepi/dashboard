@@ -19,11 +19,11 @@ import Users from './components/dashboard/Users/Index'
 import CreateUser from './components/dashboard/Users/Create'
 
 const routes = [
-    {
-        path: '/',
-        name: 'home',
-        redirect: "dashboard",
-    },
+    // {
+    //     path: '/',
+    //     name: 'home',
+    //     redirect: "dashboard",
+    // },
     {
         path: '/login',
         name: 'login',
@@ -45,7 +45,7 @@ const routes = [
         }
     },
     {
-        path: '/dashboard',
+        path: '/',
         components: {
             main: Dashboard,
         },
@@ -103,6 +103,11 @@ const routes = [
         meta: {
             requiresAuth: true,
         }
+    },
+    {
+        path: "*",
+        name: 'notfound',
+        redirect: "/",
     },
 ];
 

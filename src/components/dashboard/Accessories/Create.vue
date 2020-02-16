@@ -1,13 +1,19 @@
 <template>
-    <div class="create_theater p-4">
+    <div class="create_theater p-3">
 
         <vue-topprogress ref="topProgress" />
 
-        <h5 class="mb-3">
-            <strong>Add a new accessory</strong>
-            <span class="clearfix"></span>
-            <small>You can add a new accessory here.</small>
-        </h5>
+        <div class="titlebar pb-2 mb-3">
+
+            <strong class="side-component-title">
+                <i class="fa fa-microchip text-primary mr-2"></i>
+                Add a new accessory
+                <small class="border-left-title">
+                    You can add a new accessory here.
+                </small>
+            </strong>
+
+        </div>
 
         <div class="clearfix"></div>
 
@@ -330,7 +336,12 @@
 
                         this.$refs.topProgress.done();
 
-                        this.$router.push({ name: 'accessories' });
+                        this.$router.push({
+                            name: 'accessories',
+                            params: {
+                                reloard: true,
+                            },
+                        });
 
                     }).catch(() => {
 

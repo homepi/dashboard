@@ -1,16 +1,18 @@
 <template>
 
-    <div class="logs p-4">
+    <div class="logs p-3">
 
         <vue-topprogress ref="topProgress" />
 
-        <h5 class="mb-3">
-            Logs
-            <span class="clearfix"></span>
-            <small>
-                You can see and manage your logs here.
-            </small>
-        </h5>
+        <div class="titlebar pb-2 mb-3">
+            <strong class="side-component-title">
+                <i class="fa fa-sticky-note text-primary mr-2"></i>
+                Logs
+                <small class="border-left-title">
+                    You can see and manage your logs here.
+                </small>
+            </strong>
+        </div>
 
         <div v-show="!logs.length">
             There's nothing here ...

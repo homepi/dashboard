@@ -1,18 +1,20 @@
 <template>
 
-    <div class="accessories p-4">
+    <div class="accessories p-3">
 
         <vue-topprogress ref="topProgress" />
 
         <div class="all-accessories">
 
-            <h5 class="mb-3">
-                Accessories
-                <span class="clearfix"></span>
-                <small>
-                    You can see and manage your accessories here.
-                </small>
-            </h5>
+            <div class="titlebar pb-2 mb-3">
+                <strong class="side-component-title">
+                    <i class="fa fa-microchip text-primary mr-2"></i>
+                    Accessories
+                    <small class="border-left-title">
+                        You can see and manage your accessories here.
+                    </small>
+                </strong>
+            </div>
 
             <div v-show="!accessories.length">
                 There's nothing here ...
@@ -132,18 +134,24 @@
                     this.$refs.topProgress.done();
 
                 })
+            },
+            getAccessories() {
+                this.$refs.topProgress.start();
+                this.$store.dispatch("getAccessories").then(response => {
+                    this.accessories = response.data.result;
+                    this.$refs.topProgress.done();
+                }).catch(() => {
+                    this.$refs.topProgress.done();
+                })
+            }
+        },
+        activated() {
+            if (this.$route.params.reloard){
+                this.getAccessories();
             }
         },
         mounted() {
-
-            this.$refs.topProgress.start();
-
-            this.$store.dispatch("getAccessories").then(response => {
-                this.accessories = response.data.result;
-                this.$refs.topProgress.done();
-            }).catch(() => {
-                this.$refs.topProgress.done();
-            })
+            this.getAccessories();
         }
     }
 

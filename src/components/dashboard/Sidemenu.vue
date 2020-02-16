@@ -116,8 +116,7 @@
         },
         created() {
             this.baseURL = this.$store.state.baseURL;
-        },
-        props: ['user'],
+        }
     }
 
 </script>
@@ -142,7 +141,7 @@
         text-decoration: none;
         color: #FFFFFF;
         border: 0;
-        margin: 5px;
+        margin: 3px;
         cursor: pointer;
     }
 

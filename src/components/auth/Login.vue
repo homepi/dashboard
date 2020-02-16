@@ -27,7 +27,6 @@
                 <input type="text"
                        class="form-control"
                        id="username"
-                       name="username"
                        placeholder="Username"
                        autofocus="autofocus"
                        v-model="username"
@@ -97,7 +96,6 @@
         },
         methods: {
             login() {
-
                 $('#serverError').removeClass();
 
                 this.$refs.topProgress.start();
@@ -112,7 +110,6 @@
                     this.errors = {};
                     this.loading = false;
                     this.serverError = "";
-                    // this.successMessage = 'Login successfully! Please wait ...';
 
                     this.$notify({
                         group: 'auth',

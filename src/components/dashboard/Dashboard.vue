@@ -4,7 +4,7 @@
 
         <notifications group="dashboard" position="top center" :max="1" />
 
-        <Sidemenu :user="user" />
+        <Sidemenu />
 
         <div class="main-container">
             <keep-alive>
@@ -24,16 +24,6 @@
         name: 'Dashboard',
         components: {
             Sidemenu,
-        },
-        data() {
-            return {
-                user: {},
-            }
-        },
-        mounted() {
-            this.$store.dispatch("getUser").then(response => {
-                this.user = response.data.result;
-            });
         }
     }
 

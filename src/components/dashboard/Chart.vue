@@ -1,17 +1,20 @@
 <template>
 
-    <div class="p-4">
+    <div class="p-2">
 
         <Health />
 
         <div class="weekly-chart p-2">
 
-            <strong class="side-component-title">
-                <i class="fa fa-line-chart text-primary mr-2"></i>
-                Weekly requests chart
-
-                <i class="fa fa-refresh pull-right refresh-btn"></i>
-            </strong>
+            <div class="titlebar pb-2">
+                <strong class="side-component-title">
+                    <i class="fa fa-line-chart text-primary mr-2"></i>
+                    Weekly requests chart
+                    <small class="border-left-title">
+                        You can see your weekly requests here.
+                    </small>
+                </strong>
+            </div>
 
             <div class="clearfix"></div>
             <LineChart :chart-data="chartData" :options="options" />

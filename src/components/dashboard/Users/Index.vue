@@ -1,23 +1,27 @@
 <template>
 
-    <div class="logs p-4">
+    <div class="logs p-3">
 
         <vue-topprogress ref="topProgress" />
 
-        <h5 class="mb-3">
+        <div class="titlebar pb-2 mb-3">
 
-            <span class="pull-left">
+            <strong class="side-component-title pull-left">
+                <i class="fa fa-sticky-note text-primary mr-2"></i>
                 Users
-                <span class="clearfix"></span>
-                <small>You can manage all the users here.</small>
-            </span>
+                <small class="border-left-title">
+                    You can manage all the users here.
+                </small>
+            </strong>
 
-            <router-link class="btn btn-primary pull-right"
-                         :to="{ name: 'create_user' }">
+            <router-link class="btn btn-primary pull-right" :to="{ name: 'create_user' }">
                 Create a new user
+                <i class="fa fa-plus-circle ml-1"></i>
             </router-link>
 
-        </h5>
+            <div class="clearfix"></div>
+
+        </div>
 
         <div class="clearfix"></div>
 
