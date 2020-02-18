@@ -75,21 +75,21 @@
                 <div class="accessory_actions">
 
                     <div class="card card-body bg-dark accessory_action"
-                         v-on:click="onActionClicked($event, 'door')">
+                         v-on:click="onActionClicked($event, '1')">
 
                         <img src="../../../assets/icons/doorbell.svg" />
                         <span class="title mt-1">Door</span>
                     </div>
 
                     <div class="card card-body bg-dark accessory_action"
-                         v-on:click="onActionClicked($event, 'lamp')">
+                         v-on:click="onActionClicked($event, '2')">
 
                         <img src="../../../assets/icons/lamp-on.svg" />
                         <span class="title mt-1">Lamp</span>
                     </div>
 
                     <div class="card card-body bg-dark accessory_action"
-                         v-on:click="onActionClicked($event, 'toggle')">
+                         v-on:click="onActionClicked($event, '3')">
 
                         <img src="../../../assets/icons/switch-on.svg" />
                         <span class="title mt-1">Toggle</span>

@@ -138,7 +138,7 @@
             getAccessories() {
                 this.$refs.topProgress.start();
                 this.$store.dispatch("getAccessories").then(response => {
-                    this.accessories = response.data.result;
+                    this.accessories = response.data.result.data;
                     this.$refs.topProgress.done();
                 }).catch(() => {
                     this.$refs.topProgress.done();

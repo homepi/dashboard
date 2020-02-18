@@ -79,7 +79,7 @@
             this.baseURL = this.$store.state.baseURL;
 
             this.$store.dispatch("getLogs").then(response => {
-                this.logs = response.data.result;
+                this.logs = response.data.result.data;
                 this.$refs.topProgress.done();
             }).catch(error => {
                 console.log(error);
