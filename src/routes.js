@@ -72,8 +72,8 @@ const routes = [
                 },
             },
             {
-                path: 'profile',
-                name: 'profile',
+                path: 'settings',
+                name: 'settings',
                 components: {
                     dashboard: Profile,
                 },

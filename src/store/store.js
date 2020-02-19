@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import config from './api'
 
 Vue.use(Vuex);
 
-let baseURL =  'http://10.1.1.110:55283';
-axios.defaults.baseURL = baseURL + '/api/v1';
+let baseURL = `${config.schema}://${config.baseURL}/${config.version}`;
+axios.defaults.baseURL = baseURL;
 
 export const store = new Vuex.Store({
     state: {
         token: localStorage.getItem('access_token') || null,
+        refreshed_token: localStorage.getItem('refreshed_token') || null,
         user: null,
         baseURL: baseURL,
     },
@@ -51,29 +53,6 @@ export const store = new Vuex.Store({
                 resolve();
             })
         },
-        refreshTokenAndGetUser(context) {
-
-            axios.defaults.headers.common['Authorization'] =
-                'Bearer ' + context.state.token;
-
-            return new Promise((resolve, reject) => {
-                axios.post('/auth/@refresh').then(response => {
-
-                    let {token, refreshed_token} = response.data.result;
-
-                    localStorage.setItem('access_token', token);
-                    localStorage.setItem('refreshed_token', refreshed_token);
-                    context.commit('retrieveToken', response.data.result);
-
-                    let user = response.data.result;
-                    context.commit('addUserData', user);
-
-                    resolve(token)
-                }).catch(error => {
-                    reject(error)
-                })
-            })
-        },
         getHealth(context) {
 
             axios.defaults.headers.common['Authorization'] =
@@ -81,21 +60,6 @@ export const store = new Vuex.Store({
 
             return new Promise((resolve, reject) => {
                 axios.get('/sys/@health')
-                    .then(response => {
-                        resolve(response)
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
-            })
-        },
-        getRecentLogs(context) {
-
-            axios.defaults.headers.common['Authorization'] =
-                'Bearer ' + context.state.token;
-
-            return new Promise((resolve, reject) => {
-                axios.get('/user/@recent_logs')
                     .then(response => {
                         resolve(response)
                     })
@@ -134,13 +98,13 @@ export const store = new Vuex.Store({
                     })
             })
         },
-        getLogs(context) {
+        getLogs(context, limit) {
 
             axios.defaults.headers.common['Authorization'] =
                 'Bearer ' + context.state.token;
 
             return new Promise((resolve, reject) => {
-                axios.get('/user/@logs')
+                axios.get('/user/@logs?limit=' + limit)
                     .then(response => {
                         resolve(response)
                     })
@@ -232,7 +196,7 @@ export const store = new Vuex.Store({
             return new Promise((resolve, reject) => {
 
                 const params = new URLSearchParams();
-                params.append('q', data.query);
+                params.append('query', data.query);
 
                 axios.post('/users/@search', params,{
                     headers: {

@@ -1,13 +1,13 @@
 <template>
 
-    <div class="logs p-3">
+    <div class="users p-3">
 
         <vue-topprogress ref="topProgress" />
 
-        <div class="titlebar pb-2 mb-3">
+        <div class="titlebar pb-2">
 
-            <strong class="side-component-title pull-left">
-                <i class="fa fa-sticky-note text-primary mr-2"></i>
+            <strong class="side-component-title pull-left mt-2">
+                <i class="icofont-users text-primary mr-2"></i>
                 Users
                 <small class="border-left-title">
                     You can manage all the users here.
@@ -16,8 +16,11 @@
 
             <router-link class="btn btn-primary pull-right" :to="{ name: 'create_user' }">
                 Create a new user
-                <i class="fa fa-plus-circle ml-1"></i>
+                <i class="icofont-plus ml-1"></i>
             </router-link>
+
+            <i class="icofont-refresh pull-right refresh-btn mr-3 mt-2"
+               @click="getUsers()"></i>
 
             <div class="clearfix"></div>
 
@@ -33,12 +36,14 @@
 
         <div class="users mt-3">
             
-            <div class="user-card pull-left col-md-2" v-for="user in users">
+            <div class="user-card pull-left col-md-2" v-for="user in users"
+                 @click.prevent.stop="$parent.$refs.menu.open($event, 'users-menu', user)">
 
                 <div class="user-details">
 
                     <img :src="baseURL + '/uploads/avatars/' + user.avatar + '.png'"
-                         class="avatar-card pull-left" />
+                         class="avatar-card pull-left"
+                         :alt="user.fullname" />
 
                     <span class="user-name-list">
                         {{ user.fullname }}
@@ -59,21 +64,23 @@
         name: 'Users',
         data() {
             return {
-                baseURL: null,
                 users: [],
             }
         },
+        methods: {
+            getUsers() {
+                this.users = [];
+                this.$refs.topProgress.start();
+                this.$store.dispatch("getUsers").then(response => {
+                    this.users = response.data.result;
+                    this.$refs.topProgress.done();
+                }).catch(() => {
+                    this.$refs.topProgress.done();
+                })
+            }
+        },
         mounted() {
-
-            this.$refs.topProgress.start();
-            this.baseURL = this.$store.state.baseURL;
-
-            this.$store.dispatch("getUsers").then(response => {
-                this.users = response.data.result;
-                this.$refs.topProgress.done();
-            }).catch(() => {
-                this.$refs.topProgress.done();
-            })
+            this.getUsers();
         }
     }
 </script>

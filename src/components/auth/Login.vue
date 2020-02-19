@@ -12,11 +12,6 @@
 
             <h2>Login</h2>
 
-            <div class="alert alert-success"
-                 v-if="successMessage">
-                <strong>{{ successMessage }}</strong>
-            </div>
-
             <div id="serverError">
                 <div class="alert alert-danger" v-if="serverError">
                     <strong>{{ serverError }}</strong>
@@ -27,14 +22,14 @@
                 <input type="text"
                        class="form-control"
                        id="username"
-                       placeholder="Username"
+                       placeholder="Username or Email"
                        autofocus="autofocus"
                        v-model="username"
                        required="required" />
 
-                <small v-if="errors.username" class="text-danger fa-pull-left text-left">
+                <small v-if="errors.user" class="text-danger fa-pull-left text-left">
                     <span class="clearfix">
-                        {{ errors.username }}
+                        {{ errors.user }}
                     </span>
                 </small>
             </div>
@@ -47,9 +42,9 @@
                        v-model="password"
                        required="required" />
 
-                <small v-if="errors.password" class="text-danger fa-pull-left text-left">
+                <small v-if="errors.pass" class="text-danger fa-pull-left text-left">
                     <span class="clearfix">
-                        {{ errors.password }}
+                        {{ errors.pass }}
                     </span>
                 </small>
             </div>
@@ -79,11 +74,6 @@
 
     export default {
         name: 'login',
-        props: {
-            dataSuccessMessage: {
-                type: String,
-            }
-        },
         data() {
             return {
                 errors: {},
@@ -91,16 +81,15 @@
                 password: '',
                 loading: false,
                 serverError: '',
-                successMessage: this.dataSuccessMessage,
             }
         },
         methods: {
             login() {
-                $('#serverError').removeClass();
-
-                this.$refs.topProgress.start();
 
                 this.loading = true;
+                this.serverError = "";
+                $('#serverError').removeClass();
+                this.$refs.topProgress.start();
 
                 this.$store.dispatch('createAuthToken', {
                     username: this.username,
@@ -126,32 +115,31 @@
 
                 }).catch(error => {
 
+                    $('#serverError')
+                        .addClass('shake animated')
+                        .one('webkitAnimationEnd' +
+                            ' mozAnimationEnd ' +
+                            'MSAnimationEnd ' +
+                            'oanimationend ' +
+                            'animationend', () => {
+                                $(this).removeClass();
+                            });
+
+                    this.errors = {};
                     this.loading = false;
 
                     if (typeof error.response !== "undefined"){
 
-                        if (error.response.data.message) {
-                            this.errors = {};
-                            this.serverError = error.response.data.message;
+                        if(error.response.status === 404) {
+                            this.serverError = "User does not exists! Please enter your username or email correctly!";
+                            this.password = '';
+                        } else if(error.response.status === 401){
+                            this.serverError = "Password does not match with user!";
+                            this.password = '';
                         } else {
-                            this.errors = error.response.data.result;
-                            this.serverError = "Please correct the following error(s) in form!";
+                            this.serverError = "Cannot connect to server, Please contact your server administrator!";
+                            this.password = '';
                         }
-
-                        this.password = '';
-                        this.successMessage = '';
-
-                        $('#serverError')
-                            .addClass('shake animated')
-                            .one('webkitAnimationEnd' +
-                                ' mozAnimationEnd ' +
-                                'MSAnimationEnd ' +
-                                'oanimationend ' +
-                                'animationend', () => {
-
-                                $(this).removeClass();
-                            });
-
                     }
 
                     this.$refs.topProgress.done();
@@ -159,4 +147,5 @@
             }
         }
     }
+
 </script>

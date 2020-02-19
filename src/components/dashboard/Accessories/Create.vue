@@ -6,7 +6,7 @@
         <div class="titlebar pb-2 mb-3">
 
             <strong class="side-component-title">
-                <i class="fa fa-microchip text-primary mr-2"></i>
+                <i class="icofont-micro-chip text-primary mr-2"></i>
                 Add a new accessory
                 <small class="border-left-title">
                     You can add a new accessory here.
@@ -138,7 +138,7 @@
                     <template slot="option" slot-scope="props">
 
                         <img class="option__image"
-                             :src="baseURL +  '/avatars/' + props.option.user_hash + '/' + props.option.avatar"
+                             :src="baseURL + '/uploads/avatars/' + props.option.avatar + '.png'"
                              :alt="props.option.fullname">
 
                         <div class="option__desc">
@@ -184,7 +184,6 @@
         },
         data() {
             return {
-                baseURL: null,
                 users: [],
                 isLoading: false,
                 selectedUsers: [],
@@ -210,16 +209,18 @@
                 return `${username} – ${fullname}`
             },
             findUser(query) {
-                this.users = [];
-                this.isLoading = true;
-                this.$store.dispatch('searchUser', {
-                    query: query,
-                }).then(response => {
-                    this.users = response.data.result;
-                    this.isLoading = false
-                }).catch((error) => {
-                    this.isLoading = false;
-                })
+                if (query.length > 3){
+                    this.users = [];
+                    this.isLoading = true;
+                    this.$store.dispatch('searchUser', {
+                        query: query,
+                    }).then(response => {
+                        this.users = response.data.result;
+                        this.isLoading = false
+                    }).catch(() => {
+                        this.isLoading = false;
+                    })
+                }
             },
             clearAll () {
                 this.selectedUsers = []
@@ -363,9 +364,6 @@
             updateAccessoryPinType(pinType) {
                 this.pinType = pinType;
             }
-        },
-        created() {
-            this.baseURL = this.$store.state.baseURL;
         }
     }
 

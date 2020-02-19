@@ -10,60 +10,39 @@
 
             <ul class="menu">
                 <li>
-                    <router-link :to="{ name: 'dashboard' }">
-                        <i class="fa fa-dashboard"></i>
+                    <router-link :to="{ name: 'dashboard' }" v-title="'Dashboard'" title-placement="right">
+                        <i class="icofont-dashboard-web"></i>
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="{ name: 'accessories' }">
-                        <i class="fa fa-microchip"></i>
+                    <router-link :to="{ name: 'accessories' }" v-title="'Accessories'" title-placement="right">
+                        <i class="icofont-micro-chip"></i>
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="{ name: 'logs' }">
-                        <i class="fa fa-sticky-note"></i>
+                    <router-link :to="{ name: 'logs' }" v-title="'Logs'" title-placement="right">
+                        <i class="icofont-notebook"></i>
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="{ name: 'users' }">
-                        <i class="fa fa-users"></i>
+                    <router-link :to="{ name: 'users' }" v-title="'Users'" title-placement="right">
+                        <i class="icofont-users"></i>
                     </router-link>
                 </li>
-            </ul>
-
-            <ul class="menu">
-
-                <li class="custom-btn-menu">
-                    <router-link class="bg-primary" :to="{ name: 'create_accessory' }">
-                        <i class="fa fa-plus"></i>
+                <li>
+                    <router-link :to="{ name: 'create_accessory' }" v-title="'Create new accessory'" title-placement="right">
+                        <i class="icofont-plus"></i>
                     </router-link>
                 </li>
-
             </ul>
 
             <div class="footer">
-                <a class="user-avatar-button">
-
-                    <img :src="baseURL + '/uploads/avatars/' + user.avatar + '.png'"
-                         v-if="user.avatar"
-                         class="avatar"
-                         :alt="user.fullname" />
-
-                    <ul class="user-menu-hover">
-                        <li>
-                            <button @click="redirect('profile')">
-                                <i class="fa fa-edit"></i>
-                                Edit profile
-                            </button>
-                        </li>
-                        <li>
-                            <button class="bg-danger" @click="openLogoutModal()">
-                                <i class="fa fa-power-off"></i>
-                                Logout
-                            </button>
-                        </li>
-                    </ul>
-
+                <a class="user-avatar-button" @click.prevent.stop="actionsBtn($event)">
+                    <div class="online">
+                        <img :src="baseURL + '/uploads/avatars/' + user.avatar + '.png'"
+                             class="avatar"
+                             :alt="user.fullname" />
+                    </div>
                 </a>
             </div>
 
@@ -94,31 +73,17 @@
 </template>
 
 <script>
-
-    import $ from "jquery";
-
     export default {
         name: 'Sidemenu',
-        data() {
-            return {
-                baseURL: null,
-            }
-        },
         methods: {
-            redirect(route_name){
-                this.$router.push({ name: route_name }).then(() => {
-                    $("#logoutModal").modal('hide');
-                });
+            actionsBtn($event) {
+                this.$parent.$refs.menu.open($event, 'usermenu-actions', {})
             },
-            openLogoutModal() {
-                $("#logoutModal").modal();
+            redirect(name) {
+                this.$router.push({ name });
             }
-        },
-        created() {
-            this.baseURL = this.$store.state.baseURL;
         }
     }
-
 </script>
 
 <style>
@@ -169,17 +134,39 @@
         list-style: none;
     }
 
+    ul.menu > li:first-child {
+        margin: 5px 0;
+    }
+
     ul.menu > li {
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
         margin: 15px 0;
     }
 
     ul.menu > li > a {
         font-size: 20px;
         color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+        display: -webkit-inline-box;
+        display: inline-flex;
+        padding: 10px;
+        margin: 10px 3px;
+        background: #343435;
+        border-radius: 50%;
+        opacity: 0.6;
+    }
+
+    ul.menu > li:hover > a {
+        opacity: 1;
     }
 
     ul.menu > li > a.router-link-exact-active {
-        color: #007bff;
+        color: #FFFFFF;
+        background: #316cff;
+        opacity: 1;
     }
 
     .sidemenu {

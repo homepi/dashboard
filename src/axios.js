@@ -1,3 +1,4 @@
+import Vue from "vue";
 import axios from 'axios';
 import {store} from './store/store';
 
@@ -32,8 +33,18 @@ axios.interceptors.response.use(function (response) {
                 console.log("Refreshed");
                 isAlreadyFetchingAccessToken = false;
                 onAccessTokenFetched(response.data.result.token);
-            }).catch(err => {
-                console.log("Not Refreshed", err);
+            }).catch(() => {
+                store.dispatch('logout').then(() => {
+                    Vue.$router.push({ name: 'login' }).then(() => {
+                        Vue.notify({
+                            group: 'auth',
+                            type: 'error',
+                            text: "Login again.",
+                            title: "Failed",
+                            duration: 2000,
+                        });
+                    });
+                })
             })
         }
 

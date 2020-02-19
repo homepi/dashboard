@@ -8,11 +8,13 @@
 
             <div class="titlebar pb-2 mb-3">
                 <strong class="side-component-title">
-                    <i class="fa fa-microchip text-primary mr-2"></i>
+                    <i class="icofont-micro-chip text-primary mr-2"></i>
                     Accessories
                     <small class="border-left-title">
                         You can see and manage your accessories here.
                     </small>
+                    <i class="icofont-refresh pull-right refresh-btn"
+                       @click="getAccessories()"></i>
                 </strong>
             </div>
 
@@ -21,7 +23,9 @@
             </div>
 
             <div class="card card-accessory text-white bg-darker mb-3"
-                 v-for="accessory in accessories" @click="openTaskModal(accessory)">
+                 v-for="accessory in accessories"
+                 @contextmenu.prevent="$parent.$refs.menu.open($event, 'accessory-menu', accessory)"
+                 @click.prevent.stop="openTaskModal(accessory)">
 
                 <div class="card-header">
 
@@ -47,11 +51,8 @@
                         Deactive
                     </span>
 
-                    <!--<div class="actions pull-right">-->
-                        <!--<i class="fa fa-trash"></i>-->
-                    <!--</div>-->
-
                 </div>
+
             </div>
 
         </div>
@@ -136,6 +137,7 @@
                 })
             },
             getAccessories() {
+                this.accessories = [];
                 this.$refs.topProgress.start();
                 this.$store.dispatch("getAccessories").then(response => {
                     this.accessories = response.data.result.data;

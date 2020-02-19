@@ -143,7 +143,6 @@
         name: 'CreateUser',
         data() {
             return {
-                baseURL: null,
                 fullname: null,
                 username: null,
                 email: null,
@@ -151,9 +150,6 @@
                 password_confirmation: null,
                 role_id: 2,
             }
-        },
-        mounted() {
-            this.baseURL = this.$store.state.baseURL;
         }
     }
 

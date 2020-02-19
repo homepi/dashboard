@@ -6,11 +6,13 @@
 
         <div class="titlebar pb-2 mb-3">
             <strong class="side-component-title">
-                <i class="fa fa-sticky-note text-primary mr-2"></i>
+                <i class="icofont-notebook text-primary mr-2"></i>
                 Logs
                 <small class="border-left-title">
                     You can see and manage your logs here.
                 </small>
+                <i class="icofont-refresh pull-right refresh-btn"
+                   @click="getLogs()"></i>
             </strong>
         </div>
 
@@ -37,7 +39,9 @@
                     {{ row + 1 }}
                 </td>
                 <td>
-                    <img class="left-side-avatar" :src="baseURL + '/uploads/avatars/' + log.user.avatar + '.png'">
+                    <img class="left-side-avatar"
+                         :src="baseURL + '/uploads/avatars/' + log.user.avatar + '.png'"
+                         :alt="log.user.fullname" />
                     {{ log.user.fullname }}
                 </td>
                 <td>{{ log.accessory.description }}</td>
@@ -68,23 +72,23 @@
         name: 'Logs',
         data() {
             return {
-                baseURL: null,
                 logs: [],
             }
         },
+        methods: {
+            getLogs() {
+                this.logs = [];
+                this.$refs.topProgress.start();
+                this.$store.dispatch("getLogs").then(response => {
+                    this.logs = response.data.result.data;
+                    this.$refs.topProgress.done();
+                }).catch(error => {
+                    this.$refs.topProgress.done();
+                })
+            }
+        },
         mounted() {
-
-            this.$refs.topProgress.start();
-
-            this.baseURL = this.$store.state.baseURL;
-
-            this.$store.dispatch("getLogs").then(response => {
-                this.logs = response.data.result.data;
-                this.$refs.topProgress.done();
-            }).catch(error => {
-                console.log(error);
-                this.$refs.topProgress.done();
-            })
+            this.getLogs();
         }
     }
 

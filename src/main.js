@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import routes from './routes'
+import VTitle from 'v-title';
 import VueRouter from 'vue-router'
 import apiConfig from './store/api'
 import { store } from './store/store'
@@ -8,15 +9,30 @@ import Notifications from 'vue-notification'
 import vueTopprogress from 'vue-top-progress'
 import Master from './components/layouts/Master'
 
+import 'v-title/lib/element-ui';
+
+import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./assets/css/icofont.css";
+import "animate.css/animate.min.css";
+
+import "./assets/css/app.css";
+
+import 'vue-loaders/dist/vue-loaders.css';
+import VueLoaders from 'vue-loaders';
+
 Vue.config.productionTip = false;
 
+Vue.use(VTitle);
 Vue.use(VueRouter);
+
 Vue.use(VueApexCharts);
+Vue.component('apexchart', VueApexCharts);
+
 Vue.use(Notifications);
 Vue.use(vueTopprogress);
 Vue.use(require('vue-jalali-moment'));
-
-Vue.component('apexchart', VueApexCharts);
 
 window.eventBus = new Vue();
 
@@ -24,15 +40,6 @@ const router = new VueRouter({
     routes,
     mode: 'history'
 });
-
-import "bootstrap/dist/js/bootstrap.min.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.min.css";
-import "animate.css/animate.min.css";
-import "./assets/css/app.css";
-
-import 'vue-loaders/dist/vue-loaders.css';
-import VueLoaders from 'vue-loaders';
 
 Vue.component('loader', VueLoaders.component);
 
@@ -60,7 +67,6 @@ router.beforeEach(async (to, from, next) => {
             if (store.state.user == null){
                 await store.dispatch("getUser").then(response => {
                     store.state.user = response.data.result;
-                    // bus.$connect();
                 }).catch(err => {
                     if (err.response.status !== 401){
                         store.dispatch('logout').then(() => {
@@ -87,7 +93,7 @@ import "./axios";
 Vue.mixin({
     data() {
         return {
-            get apiBaseUrl() {
+            get baseURL() {
                 return `${apiConfig.schema}://${apiConfig.baseURL}`;
             },
             get user() {

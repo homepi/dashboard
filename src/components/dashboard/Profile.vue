@@ -1,14 +1,16 @@
 <template>
 
-    <div class="profile p-4">
+    <div class="profile p-3">
 
-        <h5 class="title-border-bottom">
-            Profile
-            <span class="clearfix"></span>
-            <small>
-                You can see and edit your profile here.
-            </small>
-        </h5>
+        <div class="titlebar pb-2 mb-3">
+            <strong class="side-component-title">
+                <i class="icofont-user text-primary mr-2"></i>
+                Profile
+                <small class="border-left-title">
+                    You can see and edit your profile here.
+                </small>
+            </strong>
+        </div>
 
         <div class="clearfix"></div>
 

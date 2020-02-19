@@ -5,9 +5,9 @@
         <div class="charts">
 
             <strong class="side-component-title">
-                <i class="fa fa-heartbeat text-danger mr-2"></i>
+                <i class="icofont-heart-beat text-danger mr-2"></i>
                 Health care!
-                <i class="fa fa-refresh pull-right refresh-btn"
+                <i class="icofont-refresh pull-right refresh-btn"
                    @click="updateCharts"></i>
             </strong>
 
@@ -49,9 +49,9 @@
         <div class="recent-activities">
 
             <strong class="side-component-title">
-                <i class="fa fa-sticky-note mr-2"></i>
+                <i class="icofont-notebook mr-2"></i>
                 Recent Activities!
-                <i class="fa fa-refresh pull-right refresh-btn"
+                <i class="icofont-refresh pull-right refresh-btn"
                     @click="loadRecentLogs"></i>
             </strong>
 
@@ -236,8 +236,8 @@
 
                 this.recent_logs = [];
 
-                this.$store.dispatch('getRecentLogs').then((response) => {
-                    this.recent_logs = response.data.result;
+                this.$store.dispatch('getLogs', 4).then((response) => {
+                    this.recent_logs = response.data.result.data;
                 });
 
             },

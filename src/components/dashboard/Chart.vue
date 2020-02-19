@@ -8,7 +8,7 @@
 
             <div class="titlebar pb-2">
                 <strong class="side-component-title">
-                    <i class="fa fa-line-chart text-primary mr-2"></i>
+                    <i class="icofont-dashboard-web text-primary mr-2"></i>
                     Weekly requests chart
                     <small class="border-left-title">
                         You can see your weekly requests here.

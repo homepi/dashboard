@@ -51,6 +51,14 @@ body {
     user-select: none;
 }
 
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
 .logo {
     width: 40px;
     height: 40px;
@@ -165,11 +173,6 @@ button:active, button:focus {
     outline: none !important;
 }
 
-.users > .user {
-    float: left;
-    margin: 10px 5px;
-}
-
 .bg-dark {
     background-color: #131212 !important
 }
@@ -207,6 +210,7 @@ img.avatar {
     border-radius: 5px;
     padding: 5px;
     cursor: pointer;
+    width: 200px;
 }
 
 .user-card:hover {
