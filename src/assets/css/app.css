@@ -487,6 +487,11 @@ img.left-side-avatar {
     text-align: center;
 }
 
+.table-dark > thead > tr > th,
+.table-dark > tbody > tr > td{
+    border: 0 !important;
+}
+
 tr.new-log > td:first-child {
     background: #dc3545;
 }

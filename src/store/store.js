@@ -103,6 +103,10 @@ export const store = new Vuex.Store({
             axios.defaults.headers.common['Authorization'] =
                 'Bearer ' + context.state.token;
 
+            if (limit === undefined){
+                limit = 15;
+            }
+
             return new Promise((resolve, reject) => {
                 axios.get('/user/@logs?limit=' + limit)
                     .then(response => {

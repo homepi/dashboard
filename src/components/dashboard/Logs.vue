@@ -26,10 +26,10 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>User</th>
-                <th>Event</th>
+                <th>Ran by</th>
                 <th>Accessory</th>
-                <th>Created At</th>
+                <th>Event</th>
+                <th>Logged At</th>
             </tr>
             </thead>
             <tbody>
@@ -38,23 +38,39 @@
                 <td class="text-center" style="width:3%">
                     {{ row + 1 }}
                 </td>
+
                 <td>
-                    <img class="left-side-avatar"
-                         :src="baseURL + '/uploads/avatars/' + log.user.avatar + '.png'"
-                         :alt="log.user.fullname" />
-                    {{ log.user.fullname }}
+
+                    <!-- User preview -->
+                    <div v-if="log.type === 1">
+                        <img class="left-side-avatar"
+                             :src="baseURL + '/uploads/avatars/' + log.user.avatar + '.png'"
+                             :alt="log.user.fullname" />
+                        <strong class="pl-1">{{ log.user.fullname }}</strong>
+                    </div>
+
+                    <!-- Webhook preview -->
+                    <div v-if="log.type === 2">
+                        <i class="webhook-icon icofont-link"></i>
+                        <strong class="webhook-title">Webhook</strong>
+                    </div>
+
                 </td>
-                <td>{{ log.accessory.description }}</td>
+
                 <td>
                     <div class="accessory-badge">
                         <i class="select-icon mr-2" :class="log.accessory.icon"></i>
                         {{ log.accessory.name }}
                     </div>
                 </td>
+
+                <td>{{ log.accessory.description }}</td>
+
                 <td>
                     <i class="fa fa-clock-o"></i>
-                    {{ log.created_at.seconds | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
+                    {{ log.created_at | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
                 </td>
+
             </tr>
 
             </tbody>
@@ -63,6 +79,22 @@
     </div>
 
 </template>
+
+<style>
+
+    .webhook-title {
+        display: inline-block;
+        margin-left: 10px;
+        color: #316cff;
+    }
+
+    .webhook-icon {
+        font-size: 20px;
+        float: left;
+        color: #316cff;
+    }
+
+</style>
 
 <script>
 
@@ -82,7 +114,7 @@
                 this.$store.dispatch("getLogs").then(response => {
                     this.logs = response.data.result.data;
                     this.$refs.topProgress.done();
-                }).catch(error => {
+                }).catch(() => {
                     this.$refs.topProgress.done();
                 })
             }

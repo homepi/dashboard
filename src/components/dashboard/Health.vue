@@ -60,9 +60,19 @@
                 <div class="toast toast-dark opacity-1" v-for="log in recent_logs">
 
                     <div class="toast-header">
-                        <strong class="mr-auto">
+
+                        <!-- Webhook preview -->
+                        <strong class="mr-auto" v-if="log.type === 2">
+                            <i class="icofont-link"></i>
+                            Webhook
+                        </strong>
+
+                        <!-- User preview -->
+                        <strong class="mr-auto" v-if="log.type === 1">
+                            <i class="icofont-user"></i>
                             {{ log.user.fullname }}
                         </strong>
+
                         <small>
                             {{ log.created_at.seconds | moment('timezone', 'Asia/Tehran', 'dddd, MMMM Do, h:mm a') }}
                         </small>
