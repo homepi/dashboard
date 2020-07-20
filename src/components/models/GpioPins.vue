@@ -13,16 +13,6 @@
 
         </div>
 
-        <div class="badge badge-warning m-2 p-0 pull-right">
-            <label for="pins_type">
-                The pins type:
-            </label>
-            <select id="pins_type" v-model="pins_type" @change="onChangePinsType">
-                <option value="board" selected>GPIO.BOARD</option>
-                <option value="bcm">GPIO.BCM</option>
-            </select>
-        </div>
-
         <span id="gpio_err" class="badge text-center pull-right m-2 p-1"
               v-show="error.message"
               v-bind:class="[error.type]">
@@ -89,7 +79,6 @@
                     type: null,
                     message: null,
                 },
-                pins_type: "board",
                 pins: {
                     top: null,
                     bottom: null,
@@ -97,18 +86,9 @@
             }
         },
         methods: {
-            onChangePinsType(event) {
-                this.$emit("accessory-pin-type", event.target.value);
-                this.loadPins(event.target.value);
-                this.error = {
-                    type: "badge-info",
-                    message: "You're using GPIO." + event.target.value.toUpperCase() + " type now!",
-                };
-            },
             onPinClicked(pin) {
 
                 this.$emit("accessory-pin", pin);
-                this.$emit("accessory-pin-type", this.pins_type);
 
                 if (this.selectedPin.element != null) {
                     this.selectedPin.element.removeClass("pin_selected");
@@ -156,11 +136,11 @@
                     $("#gpio_err > span").text("");
                 }
             },
-            loadPins(type) {
+            loadPins() {
 
                 this.loading = true;
 
-                this.$store.dispatch("getPins", type).then(response => {
+                this.$store.dispatch("getPins").then(response => {
                     this.pins = response.data.result;
                     this.loading = false;
                 }).catch(error => {
@@ -176,7 +156,7 @@
             }
         },
         created() {
-            this.loadPins(this.pins_type);
+            this.loadPins();
         }
     }
 </script>

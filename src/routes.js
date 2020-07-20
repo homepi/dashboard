@@ -4,26 +4,16 @@ import Logout from './components/auth/Logout'
 
 // Dashboard components
 import Dashboard from './components/dashboard/Dashboard'
-
-// Dashboard children components
 import Profile from './components/dashboard/Profile'
 import Logs from './components/dashboard/Logs'
 
-// Dashboard theater components
-import Chart from './components/dashboard/Chart'
-
-import Accessories from './components/dashboard/Accessories/Index'
+import Accessories from './components/dashboard/Index'
 import CreateAccessory from './components/dashboard/Accessories/Create'
 
 import Users from './components/dashboard/Users/Index'
 import CreateUser from './components/dashboard/Users/Create'
 
 const routes = [
-    // {
-    //     path: '/',
-    //     name: 'home',
-    //     redirect: "dashboard",
-    // },
     {
         path: '/login',
         name: 'login',
@@ -53,13 +43,6 @@ const routes = [
             {
                 path: '',
                 name: 'dashboard',
-                components: {
-                    dashboard: Chart,
-                },
-            },
-            {
-                path: 'accessories',
-                name: 'accessories',
                 components: {
                     dashboard: Accessories,
                 },

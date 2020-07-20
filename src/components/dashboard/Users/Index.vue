@@ -79,6 +79,11 @@
                 })
             }
         },
+        activated() {
+            if (this.$route.params.reloard){
+                this.getUsers();
+            }
+        },
         mounted() {
             this.getUsers();
         }

@@ -132,6 +132,27 @@ export const store = new Vuex.Store({
                     })
             })
         },
+        createUser(context, user) {
+
+            axios.defaults.headers.common['Authorization'] =
+                'Bearer ' + context.state.token;
+
+            const params = new URLSearchParams();
+            params.append('fullname', user.fullname);
+            params.append('username', user.username);
+            params.append('email', user.email);
+            params.append('password', user.password);
+            params.append('password_confirmation', user.password_confirmation);
+            params.append('role', user.role);
+
+            return new Promise((resolve, reject) => {
+                axios.post('/user/@create', params, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(resolve).catch(reject)
+            })
+        },
         getUser(context) {
 
             axios.defaults.headers.common['Authorization'] =
@@ -154,27 +175,19 @@ export const store = new Vuex.Store({
 
             return new Promise((resolve, reject) => {
                 axios.get('/accessories/' + accessory_id + '/@run')
-                    .then(response => {
-                        resolve(response)
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
+                    .then(resolve)
+                    .catch(reject)
             })
         },
-        getPins(context, pins_type) {
+        getPins(context) {
 
             axios.defaults.headers.common['Authorization'] =
                 'Bearer ' + context.state.token;
 
             return new Promise((resolve, reject) => {
-                axios.get('/pins/@' + pins_type)
-                    .then(response => {
-                        resolve(response)
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
+                axios.get('/@pins')
+                    .then(resolve)
+                    .catch(reject)
             })
         },
         refreshToken(context) {
@@ -183,13 +196,18 @@ export const store = new Vuex.Store({
                 'Bearer ' + context.state.refreshed_token;
 
             return new Promise((resolve, reject) => {
-                axios.post('/auth/@refresh')
-                    .then(response => {
-                        resolve(response)
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
+                axios.post('/auth/@refresh').then(response => {
+
+                    const {token, refreshed_token} = response.data.result;
+
+                    localStorage.setItem('access_token', token);
+                    localStorage.setItem('refreshed_token', refreshed_token);
+
+                    context.commit('retrieveToken', response.data.result);
+
+                    resolve({token, refreshed_token})
+
+                }).catch(reject)
             })
         },
         searchUser(context, data) {
@@ -206,11 +224,7 @@ export const store = new Vuex.Store({
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
-                }).then(response => {
-                    resolve(response)
-                }).catch(error => {
-                    reject(error)
-                })
+                }).then(resolve).catch(reject)
             })
         },
         createAccessory(context, data) {

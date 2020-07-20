@@ -25,14 +25,18 @@ axios.interceptors.response.use(function (response) {
     }
 
     if (status === 401) {
+
         if (!isAlreadyFetchingAccessToken) {
             isAlreadyFetchingAccessToken = true;
 
             // instead of this store call you would put your code to get new token
             store.dispatch("refreshToken").then(response => {
+
                 console.log("Refreshed");
                 isAlreadyFetchingAccessToken = false;
-                onAccessTokenFetched(response.data.result.token);
+
+                onAccessTokenFetched(response.token)
+
             }).catch(() => {
                 store.dispatch('logout').then(() => {
                     Vue.$router.push({ name: 'login' }).then(() => {
@@ -54,6 +58,7 @@ axios.interceptors.response.use(function (response) {
                 resolve(axios(originalRequest))
             })
         });
+
     }
 
     return Promise.reject(error)

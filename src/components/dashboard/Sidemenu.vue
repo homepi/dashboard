@@ -10,12 +10,7 @@
 
             <ul class="menu">
                 <li>
-                    <router-link :to="{ name: 'dashboard' }" v-title="'Dashboard'" title-placement="right">
-                        <i class="icofont-dashboard-web"></i>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'accessories' }" v-title="'Accessories'" title-placement="right">
+                    <router-link :to="{ name: 'dashboard' }" v-title="'Accessories'" title-placement="right">
                         <i class="icofont-micro-chip"></i>
                     </router-link>
                 </li>

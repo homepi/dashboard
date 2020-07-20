@@ -17,7 +17,7 @@
 
         <div class="clearfix"></div>
 
-        <form action="#" class="form-dark mt-4" @submit.prevent="submit">
+        <form action="#" class="form-dark mt-4" @submit.prevent="createUser">
 
             <div class="form-group accessory_desc_container">
 
@@ -36,8 +36,9 @@
                        id="fullname"
                        name="fullname"
                        placeholder="Enter user's fullname here"
-                       v-model="fullname"
-                       autocomplete="off" />
+                       v-model="user.fullname"
+                       autocomplete="off"
+                       required />
             </div>
 
             <div class="form-group accessory_desc_container">
@@ -57,8 +58,9 @@
                        id="username"
                        name="username"
                        placeholder="Enter user's username here"
-                       v-model="username"
-                       autocomplete="off" />
+                       v-model="user.username"
+                       autocomplete="off"
+                       required />
             </div>
 
             <div class="form-group accessory_desc_container">
@@ -77,8 +79,9 @@
                        class="form-control"
                        id="email"
                        placeholder="Enter user's email here"
-                       v-model="email"
-                       autocomplete="off" />
+                       v-model="user.email"
+                       autocomplete="off"
+                       required />
             </div>
 
             <div class="form-group accessory_desc_container">
@@ -93,19 +96,21 @@
                     Password
                 </label>
 
-                <input type="text"
+                <input type="password"
                        class="form-control"
                        id="password"
                        placeholder="Enter user's password here"
-                       v-model="password"
-                       autocomplete="off" />
+                       v-model="user.password"
+                       autocomplete="off"
+                       required />
 
-                <input type="text"
+                <input type="password"
                        class="form-control mt-2"
                        id="password_confirmation"
                        placeholder="Re-enter the password here"
-                       v-model="password_confirmation"
-                       autocomplete="off" />
+                       v-model="user.password_confirmation"
+                       autocomplete="off"
+                       required />
 
             </div>
 
@@ -121,9 +126,9 @@
                     Select a role for user
                 </label>
 
-                <select v-model="role_id" id="role" class="form-control dark-select">
-                    <option value="2" selected="selected">User</option>
-                    <option value="1">Admin</option>
+                <select v-model="user.role" id="role" class="form-control dark-select">
+                    <option value="user" selected="selected">User</option>
+                    <option value="admin">Admin</option>
                 </select>
 
             </div>
@@ -143,12 +148,50 @@
         name: 'CreateUser',
         data() {
             return {
-                fullname: null,
-                username: null,
-                email: null,
-                password: null,
-                password_confirmation: null,
-                role_id: 2,
+                user: {
+                    fullname: null,
+                    username: null,
+                    email: null,
+                    password: null,
+                    password_confirmation: null,
+                    role: "user",
+                }
+            }
+        },
+        methods: {
+            createUser() {
+
+                this.$refs.topProgress.start();
+
+                this.$store.dispatch("createUser", this.user).then(() => {
+
+                    this.$notify({
+                        group: 'dashboard',
+                        type: 'success',
+                        text: "User created successfully!",
+                        title: "Success",
+                        duration: 5000,
+                    });
+
+                    this.$refs.topProgress.done();
+
+                    this.$router.push({
+                        name: 'users',
+                        params: {
+                            reloard: true,
+                        },
+                    });
+
+                }).catch(() => {
+                    this.$notify({
+                        group: 'dashboard',
+                        type: 'error',
+                        text: "Could not create user, please try again!",
+                        duration: 5000,
+                    });
+
+                    this.$refs.topProgress.done();
+                })
             }
         }
     }

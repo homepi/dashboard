@@ -154,8 +154,7 @@
             </div>
 
             <div class="form-group p-0 bg-transparent">
-                <GpioPins v-on:accessory-pin="updateAccessoryPin"
-                          v-on:accessory-pin-type="updateAccessoryPinType" />
+                <GpioPins v-on:accessory-pin="updateAccessoryPin" />
             </div>
 
             <button class="btn btn-primary">
@@ -205,9 +204,6 @@
             }
         },
         methods: {
-            searchItemsLabel({ fullname, username }) {
-                return `${username} – ${fullname}`
-            },
             findUser(query) {
                 if (query.length > 3){
                     this.users = [];
@@ -220,15 +216,6 @@
                     }).catch(() => {
                         this.isLoading = false;
                     })
-                }
-            },
-            clearAll () {
-                this.selectedUsers = []
-            },
-            onChildClick() {
-                this.gpioError = {
-                    type: "badge-danger",
-                    message: "Choose a pin",
                 }
             },
             onActionClicked(event, name) {
@@ -304,15 +291,8 @@
                         task: this.accessory_action.name,
                         is_public: this.trust_switch,
                         pin_id: this.pin.id,
-                        pin_type: "0",
                         accessory_users: [],
                     };
-
-                    if(this.pinType === "bcm") {
-                        accessory.pin_type = "2";
-                    } else if(this.pinType === "board") {
-                        accessory.pin_type = "1";
-                    }
 
                     if (!accessory.is_public){
                         if(this.selectedUsers.length !== 0){
@@ -360,9 +340,6 @@
             },
             updateAccessoryPin(pin) {
                 this.pin = pin;
-            },
-            updateAccessoryPinType(pinType) {
-                this.pinType = pinType;
             }
         }
     }

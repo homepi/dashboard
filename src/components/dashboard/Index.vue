@@ -2,6 +2,8 @@
 
     <div class="accessories p-3">
 
+        <Health />
+
         <vue-topprogress ref="topProgress" />
 
         <div class="all-accessories">
@@ -55,42 +57,69 @@
 
             </div>
 
-        </div>
-
-        <div class="modal modal-dark fade" id="taskModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body pb-0">
-                        <h5>
-                            Are you sure you want to run {{ clickedAccessory.name }} accessory?
-                        </h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">
-                            No, never mind!
-                        </button>
-                        <button type="button" class="btn btn-outline-success" @click="runClickedAccessory">
-                            Yeah, run it!
-                        </button>
+            <div class="modal modal-dark fade" id="taskModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body pb-0">
+                            <h5>
+                                Are you sure you want to run {{ clickedAccessory.name }} accessory?
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+                                No, never mind!
+                            </button>
+                            <button type="button" class="btn btn-outline-success" @click="runClickedAccessory">
+                                Yeah, run it!
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
+
 </template>
+
+<style>
+
+    .card-accessory {
+        border: 0;
+        cursor: pointer;
+    }
+
+    .card-accessory:hover {
+        background: #007bff !important;
+    }
+
+    .bg-darker {
+        background: #181818 !important;
+    }
+
+    .all-accessories {
+        margin-right: 300px;
+    }
+
+</style>
 
 <script>
 
-    import $ from 'jquery';
     import "@/assets/css/accessories.css";
+
+    import $ from "jquery";
+    import Health from "./Health";
 
     export default {
         name: 'Index',
+        components: {
+            Health,
+        },
         data() {
             return {
                 accessories: [],
-                clickedAccessory: {},
+                clickedAccessory: {}
             }
         },
         methods: {
@@ -120,7 +149,7 @@
 
                     console.log(error.response.data);
 
-                    let message = error.response.data.result.message;
+                    let message = error.response.data.message;
 
                     $("#taskModal").modal('hide');
 
@@ -158,20 +187,3 @@
     }
 
 </script>
-
-<style>
-
-    .card-accessory {
-        border: 0;
-        cursor: pointer;
-    }
-
-    .card-accessory:hover {
-        background: #007bff !important;
-    }
-
-    .bg-darker {
-        background: #181818 !important;
-    }
-
-</style>

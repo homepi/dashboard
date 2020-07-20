@@ -133,7 +133,7 @@
                         if(error.response.status === 404) {
                             this.serverError = "User does not exists! Please enter your username or email correctly!";
                             this.password = '';
-                        } else if(error.response.status === 401){
+                        } else if(error.response.status === 420){
                             this.serverError = "Password does not match with user!";
                             this.password = '';
                         } else {
